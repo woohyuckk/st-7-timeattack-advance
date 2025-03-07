@@ -1,19 +1,15 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchDetailTodo } from "../api/todos";
-import { useQuery } from "@tanstack/react-query";
+import { useNavigate,  } from "react-router-dom";
+import { useTodoQuery } from "../hooks/useTodoQuery";
 
 export default function Detail() {
-  const { id } = useParams();
   const navigate = useNavigate();
 
   // TODO: 필수: useQuery 로 리팩터링 하세요.
   // TODO: 선택: useQuery 로 리팩터링 후, useTodoQuery 커스텀훅으로 정리해 보세요.
 
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["todos", id],
-    queryFn: ()=> fetchDetailTodo(id)
-  }) 
+
+  const { data, isLoading, error } = useTodoQuery();
 
 
   if (isLoading) return <div style={{ fontSize: 36 }}>로딩중...</div>;
